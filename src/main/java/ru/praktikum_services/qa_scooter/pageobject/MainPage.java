@@ -11,7 +11,10 @@ public class MainPage {
     private By headerOrderButtonLocator =
             By.xpath("//div[contains(@class,'Header')]/button[text()='Заказать']");
     private By oderButtonLocator =
-            By.xpath("//div[contains(@class, 'FinishButton')/button[text()='Заказать']]");
+            By.xpath("//div[contains(@class, 'FinishButton')]/button[text()='Заказать']");
+
+    //Локатор для куки
+    private By confirmCoockieLocator = By.xpath("//button[@id='rcc-confirm-button']");
 
     //конструктор класса
     public MainPage(WebDriver webDriver) {
@@ -28,6 +31,11 @@ public class MainPage {
         WebElement element = webDriver.findElement(oderButtonLocator);
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", element);
         webDriver.findElement(oderButtonLocator).click();
+    }
+
+    //клик по кнопке "Да все привыкли"
+    public void confirmCoockieClick(){
+        webDriver.findElement(confirmCoockieLocator).click();
     }
 
 

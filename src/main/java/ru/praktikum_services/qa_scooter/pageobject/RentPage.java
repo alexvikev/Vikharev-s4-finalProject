@@ -2,6 +2,11 @@ package ru.praktikum_services.qa_scooter.pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static java.time.Duration.ofSeconds;
 
 public class RentPage {
     private final WebDriver webDriver;
@@ -21,6 +26,8 @@ public class RentPage {
             By.xpath("//div[contains(@class, 'Order')]//button[text()='Заказать']");
     private By orderYesButtonLocator =
             By.xpath("//div[contains(@class, 'Order')]//button[text()='Да']");
+    private By ordercheckStatusButtonLocator =
+            By.xpath("//button[text()='Посмотреть статус']");
 
     //конструктор класса
     public RentPage(WebDriver webDriver){
@@ -29,12 +36,13 @@ public class RentPage {
 
     //Метод заполнения данных аренды
     public void fillRentPageData(String inputDate, String inputComment){
+        WebElement element = webDriver.findElement(dateInputLocator);
+        new WebDriverWait(webDriver, ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(element));
         webDriver.findElement(dateInputLocator).sendKeys(inputDate, Keys.ENTER);
         webDriver.findElement(rentPeriodInputLocator).click();
         webDriver.findElement(rentPeriodItemLocator).click();
         webDriver.findElement(scooterColorBlackCheckboxLocator).click();
         webDriver.findElement(commentInputLocator).sendKeys(inputComment);
-
     }
 
     //метод клика по кнопке "Заказать"
@@ -47,4 +55,9 @@ public class RentPage {
         webDriver.findElement(orderYesButtonLocator).click();
     }
 
+    //метод проверки оформления заказа
+    public void checkOrderCreation(){
+        WebElement checkStatus = webDriver.findElement(ordercheckStatusButtonLocator);
+        new WebDriverWait(webDriver, ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(checkStatus));
+    }
 }

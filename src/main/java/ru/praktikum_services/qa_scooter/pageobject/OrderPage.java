@@ -15,10 +15,10 @@ public class OrderPage {
     private final By addressInputLocator =
             By.xpath("//input[@placeholder='* Адрес: куда привезти заказ']");
     private final By subwayInputLocator =
-            By.xpath("//input[@placeholder='* Станция метро'");
+            By.xpath("//div/input[@placeholder='* Станция метро']");
     private final String subwayStationTitleLocator = "//div[text()='%s']";
     private final By phoneInputLocator =
-            By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер'");
+            By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер']");
     private final By nextButtonLocator =
             By.xpath("//div[contains(@class, 'NextButton')]/button[text()='Далее']");
 
@@ -34,13 +34,13 @@ public class OrderPage {
         webDriver.findElement(lastnameInputLocator).sendKeys(customerLastname);
         webDriver.findElement(addressInputLocator).sendKeys(customerAddress);
         webDriver.findElement(subwayInputLocator).click();
-        WebElement stationMenu = webDriver.findElement(By.xpath(String.format(subwayStationTitleLocator, stationTitle)));
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", stationMenu);
-        stationMenu.click();
+        WebElement subwayDropdown = webDriver.findElement(By.xpath(String.format(subwayStationTitleLocator, stationTitle)));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView();", subwayDropdown);
+        subwayDropdown.click();
         webDriver.findElement(phoneInputLocator).sendKeys(customerPhone);
     }
 
-    //Клик по кнопке "Далее"-
+    //Клик по кнопке "Далее"
     public void nextButtonClick() {
         webDriver.findElement(nextButtonLocator).click();
     }
