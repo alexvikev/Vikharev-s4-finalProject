@@ -1,21 +1,20 @@
 package ru.praktikum_services.qa_scooter.chrome_browser;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import ru.praktikum_services.qa_scooter.main.WebDriverFactory;
 import ru.praktikum_services.qa_scooter.pageobject.MainPage;
 import ru.praktikum_services.qa_scooter.pageobject.OrderPage;
 import ru.praktikum_services.qa_scooter.pageobject.RentPage;
 
-public class OrderButtonsPositiveScenarioTest_chrome {
+public class OrderButtonsPositiveScenarioTest {
+    private static final String BROWSER = "chrome";
     private WebDriver webDriver;
 
     @Before
     public void setup() {
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverFactory.getWebDriver(BROWSER);
         webDriver.get("https://qa-scooter.praktikum-services.ru/");
     }
 

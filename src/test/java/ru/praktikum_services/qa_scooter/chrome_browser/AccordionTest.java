@@ -1,26 +1,24 @@
-package ru.praktikum_services.qa_scooter.firefox_browser;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.FirefoxDriverManager;
+package ru.praktikum_services.qa_scooter.chrome_browser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.praktikum_services.qa_scooter.main.WebDriverFactory;
 import ru.praktikum_services.qa_scooter.pageobject.AccordionPage;
 import ru.praktikum_services.qa_scooter.pageobject.MainPage;
 
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class AccordionTest_firefox {
+public class AccordionTest {
+    private static final String BROWSER = "chrome";
     private WebDriver webDriver;
     private final int accordionListIndex;
     private final String expectedAnswer;
 
-    public AccordionTest_firefox(int accordionListIndex, String expectedAnswer){
+    public AccordionTest(int accordionListIndex, String expectedAnswer){
         this.accordionListIndex = accordionListIndex;
         this.expectedAnswer = expectedAnswer;
     }
@@ -41,8 +39,7 @@ public class AccordionTest_firefox {
 
     @Before
     public void setup() {
-        WebDriverManager.firefoxdriver().setup();
-        webDriver = new FirefoxDriver();
+        webDriver = WebDriverFactory.getWebDriver(BROWSER);
         webDriver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
