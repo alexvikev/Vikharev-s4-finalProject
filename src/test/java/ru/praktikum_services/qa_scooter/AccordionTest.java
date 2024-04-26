@@ -1,4 +1,4 @@
-package ru.praktikum_services.qa_scooter.chrome_browser;
+package ru.praktikum_services.qa_scooter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
